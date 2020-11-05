@@ -1,21 +1,45 @@
 
-
 @arr1 = Array.new(10,1)
 @arr2 = Array.new(10,1)
+@arrey1 = Array.new(10,100)
+@arrey2 = Array.new(10,100)
 
 
-def attack(arr)
+# def attack(arr)
+#
+#   i = rand(0..9)
+#    if arr[i] == 1
+#       arr[i] = 0
+#       puts "робот под номером #{ i+1 } уничтожен"
+#    else
+#      puts "Промазал по роботу #{ i+1 } "
+#   end
+#
+# end
+def attack(arr,arrey)
 
   i = rand(0..9)
-   if arr[i] == 1
-      arr[i] = 0
-      puts "робот под номером #{ i+1 } уничтожен"
-   else
-     puts "Промазал по роботу #{ i+1 } "
+
+  print arrey
+  puts ""
+  print arr
+  puts ""
+
+  case
+  when
+      arrey[i] > 10
+      arrey[i] -= 30
+      puts "попадание по роботу #{i+1}, робот подбит , осталось #{arrey[i]} % жизни"
+  when
+    arrey[i] == 10
+    arrey[i] = 0
+    arr[i] = 0
+    puts "попадание по роботу #{i+1}, робот убит , осталось #{arrey[i]} % жизни"
+  when
+    arr[i] == 0
+    puts "Промазал по роботу #{ i+1 } "
   end
-
 end
-
 
 def victory?
   robots_left1 = @arr1.count {|x| x == 1}
@@ -51,14 +75,14 @@ loop do
   # exit if j == 2
 
 puts "первая команда наносит удар"
-attack(@arr2)
+attack(@arr1,@arrey1)
 exit if victory?
 stats (1)
 puts "осталось роботов в первой команде #{@arr1}"
 puts""
 
 puts "вторая команда наносит удар"
-attack(@arr1)
+attack(@arr2,@arrey2)
 exit if victory?
 stats (2)
 puts "осталось роботов во второй команде #{@arr2}"
